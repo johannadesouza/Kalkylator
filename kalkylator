@@ -1,0 +1,156 @@
+package com.school.kalkylator2_0;
+import java.util.Scanner;
+
+public class kalkylator2_0 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        //Printar ut menyn
+        int alternativ = 0;
+        while(alternativ != 5){
+            int min = 1;
+            int max = 5;
+            printMenu();
+            alternativ = getVal(min,max);
+
+        if (alternativ == 1) {
+            sqrtof();
+        }
+        else if (alternativ == 2){
+            procent();
+        }
+        else if (alternativ == 3){
+            pythagoras();
+        }
+        else if (alternativ == 4){
+            circleA();
+        }
+        else if(alternativ == 5){
+            System.out.println("Hejdå :( Strunt i det då!");
+        }
+        }
+    }
+
+    //Meny för enkel kalkylator
+    public static void printMenu() {
+        System.out.println("\nENKEL KALKYLATOR\n");
+
+        System.out.println("Välkommen till kalkylatorn!");
+        System.out.println("1. Roten ur");
+        System.out.println("2. Procent");
+        System.out.println("3. Pythagoras sats");
+        System.out.println("4. Cirkelns area");
+        System.out.println("5. Avsluta\n");
+
+        System.out.println("Välj en funktion: ");
+    }
+
+    //Låter användaren ange ett flyttalsvärde mellan min och max
+    public static double getVal(double min, double max) {
+        Scanner scan = new Scanner(System.in);
+        boolean run = true;
+        double number = 0;
+        while (run){
+            while(!scan.hasNextDouble()||!scan.hasNextInt())
+            {
+                System.out.println("Felinmatning: Skriv nummer mellan " + Math.round(min) + " & " + Math.round(max));
+                scan.next();
+            }
+
+            number = scan.nextDouble();
+            //Om värdet inte är mellan min och max, börja om
+            if (number > max || number < min) {
+                System.out.println("Din dumme fan! Skriv in ett tal mellan " + Math.round(min) + " & " + Math.round(max));
+
+            }
+            else {
+                run = false;
+            }
+        } return number;
+    }
+
+    //Låter användaren ange ett heltalsvärde mellan min och max
+    public static int getVal(int min, int max) {
+        Scanner scan = new Scanner(System.in);
+        boolean run = true;
+        int number = 0;
+        while   (run) {
+            while (!scan.hasNextInt()) {
+                System.out.println("Felinmatning: Skriv nummer mellan " + Math.round(min) + " & " + Math.round(max));
+                scan.next();
+            }
+            number = scan.nextInt();
+            //Om värdet inte är mellan min och max, börja om
+            if (number > max || number < min) {
+                System.out.println("Din dumme fan! Skriv in ett tal mellan " + min + " & " + max);
+            }
+            else {
+            run = false;
+            }
+        }
+            return number;
+    }
+
+
+    //Metod för roten ur
+    public static double sqrtof() {
+        int min = 0;
+        int max = 1000;
+        System.out.println("Skriv in ett heltal mellan " + min + " & " + max);
+        int tal = getVal(min,max);
+
+        //Läser in ett heltal mellan 0 och 1000
+        double rotenUr = Math.sqrt(tal); // Tar kvadratroten av heltalet
+        double roundRotenUr = Math.round(rotenUr*100.0)/100.0; //Avrundar till två decimaler
+        System.out.println("Kvadratroten av " + tal + " är " +  roundRotenUr); // Skriver ut resultatet
+
+    return roundRotenUr;
+    }
+
+    //Metod för procent, tar in ett tal och en procentenhet
+    public static double procent() {
+        double max = 1000;
+        double min = 0;
+        System.out.println("Skriv in ett tal mellan " + Math.round(min)+ " & " + Math.round(max)); //Frågar om ett tal mellan 0-1000
+        double tal = getVal(min,max); //Anropar getVal
+
+        max = 100;
+
+        System.out.println("Ange en procentenhet mellan " + Math.round(min) + " & " + Math.round(max)); //Frågar om en procentenhet mellan 0-100
+        double procentEnhet = getVal(min,max); // Anropar metoden getVal
+        double svar = (tal/100)*procentEnhet; // Räknar ut procenten av talet
+        System.out.println("Svar: " + svar + "%"); // Skriver ut resultatet
+
+        return svar;
+    }
+    public static double pythagoras(){
+        double min = 0;
+        double max = 100;
+        System.out.println("Skriv in första talet mellan " + Math.round(min) + " & " + Math.round(max));
+        double talA = getVal(min,max); //Läser in första talet
+        System.out.println("Skriv in andra talet mellan " + Math.round(min) + " & " + Math.round(max));
+        double talB = getVal(min,max); //Läser in andra talet
+
+        double talAB = (talA * talA) + (talB * talB); //talA^2 och talB^2
+        double rotenUrtalAB = Math.sqrt(talAB); //Kvadratroten ur talA^2 + talB^2
+        System.out.printf("Svar: %.2f" , rotenUrtalAB); //Skriver ut resultatet av uträkningen
+        System.out.println();
+
+        return rotenUrtalAB;
+    }
+
+    public static double circleA(){
+        double min = 0;
+        double max = 100;
+        System.out.println("Skriv in en diameter mellan " + Math.round(min) + " & " + Math.round(max));
+
+        //Läser in ett heltal mellan 0 och 1000
+        double diameter = getVal(min, max);
+        double radie = diameter / 2; //Räknar ut radien
+        double area = radie * radie * Math.PI; //Räknar ut arean på en cirkel
+        System.out.printf("Arean är %.2f" , area); //Skriver ut resultatet
+
+        return area;
+    }
+}
+
